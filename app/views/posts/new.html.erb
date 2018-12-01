@@ -1,0 +1,8 @@
+<h1>home</h1>
+
+<%= form_with(model: @post, url: confirm_posts_path, local: true, method: :post) do |form| %>
+<%= render 'errormsg' %>
+<%= form.label :content %>
+<%= form.text_field :content %>
+<%= form.submit %>
+<% end %>

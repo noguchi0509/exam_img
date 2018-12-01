@@ -1,0 +1,13 @@
+<h1>home</h1>
+<table>
+<% @posts.each do |post| %>
+  <tr>
+    <td> <%= post.content %></td>
+    <td><%= link_to '編集する', edit_post_path(post.id), method: :get %></td>
+    <td><%= link_to '削除する', post_path(post.id), method: :delete, data: {confirm: '本当に削除していいですか？'} %></td>
+  </tr>
+<% end %>
+</table>
+
+ <p><%= link_to 'いますぐ投稿！', new_post_path, class:"btn btn-primary btn-lg" %></p>
+ 
