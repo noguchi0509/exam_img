@@ -32,6 +32,7 @@ class PostsController < ApplicationController
    def edit
      if params[:back]
        @post = Post.new(post_params)
+       @post.image = params[:image_cache]
      else
        @post = Post.find(params[:id])
      end
@@ -60,7 +61,7 @@ class PostsController < ApplicationController
     private
     
     def post_params
-      params.require(:post).permit(:content, :image)
+      params.require(:post).permit(:content, :image,:image_cache)
     end
     
     def set_post

@@ -1,8 +1,12 @@
 <h1>home</h1>
 
 <%= form_with(model: @post, url: edit_confirm_post_path, local: true, method: :post) do |form| %>
-<%= render 'errormsg' %>
-<%= form.label :content %>
-<%= form.text_field :content %>
-<%= form.submit %>
+  <%= render 'errormsg' %>
+  <%= form.label :content %>
+  <%= form.text_field :content %>
+  
+  <%= form.label :image %>
+  <%= image_tag(@post.image.url) if @post.image.url %>
+  <%= form.file_field :image %>
+  <%= form.submit %>
 <% end %>

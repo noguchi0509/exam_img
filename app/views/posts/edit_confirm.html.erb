@@ -3,14 +3,20 @@
 
 <%= form_with(model: @post, url:post_path, local: true, method: :put ) do |form| %>
 
-<%= form.label :content %>
-<%= form.hidden_field :content %>
-     
-    <p><%= @post.content %></p>
-    <%= form.submit "投稿する" %>
+  <%= form.label :content %>
+  <%= form.hidden_field :content %>
+  <p><%= @post.content %></p>
+  
+  <% if @post.image.url.present? %>
+    <%= image_tag(@post.image.url) %>
+  <% end %>
+  <%= form.hidden_field :image_cache %>
+  
+  <%= form.submit "投稿する" %>
 <% end %>
 
 <%= form_with(model: @post, url: edit_post_path, local: true, method: :get) do |form| %>
-    <%= form.hidden_field :content %>
-    <%= form.submit "もどる", name: 'back' %>
+  <%= form.hidden_field :content %>
+  <%= form.hidden_field :image_cache %>
+  <%= form.submit "もどる", name: 'back' %>
 <% end %>
