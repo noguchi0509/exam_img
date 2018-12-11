@@ -6,9 +6,13 @@
     <% if post.image.url.present? %>
     <td><%= image_tag(post.image.url) %></td>
     <% end %>
+    <td>　　投稿者：<%= post.user.name  %></td>
+  </tr>
+  <tr>
     <td><%= link_to '編集する', edit_post_path(post.id), method: :get %></td>
     <td><%= link_to '削除する', post_path(post.id), method: :delete, data: {confirm: '本当に削除していいですか？'} %></td>
   </tr>
+
 <% end %>
 </table>
 

@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     end
     
     def confirm
-      @post = Post.new(post_params)
+      @post = current_user.posts.build(post_params)
       if @post.invalid?
           render 'new'
       end
@@ -22,6 +22,7 @@ class PostsController < ApplicationController
     
     def create
       @post = Post.new(post_params)
+      @post.user_id = current_user.id
       if @post.save
           redirect_to posts_path, notice:"投稿しました"
       else
