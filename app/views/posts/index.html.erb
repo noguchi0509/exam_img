@@ -12,7 +12,7 @@
     <tr>
         <% if post.user_id != current_user.id %>
           <% if current_user.favorites.find_by(post_id: post.id).present? %>
-            <td><%= link_to 'お気に入り解除する', favorite_path(post.id), method: :delete, class: 'btn btn-danger' %></td>
+            <td><%= link_to 'お気に入り解除する', favorite_path(current_user.favorites.find_by(post_id: post.id)), method: :delete, class: 'btn btn-danger' %></td>
           <% else %>
             <td><%= link_to 'お気に入りする', favorites_path(post_id: post.id), method: :post, class: 'btn btn-primary' %></td>
           <% end %>

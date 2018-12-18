@@ -1,0 +1,14 @@
+<h1><%= @user.name %></h1>
+
+<h1>お気に入り投稿一覧</h1>
+ <% @favorites.each do |favorite| %>
+    <tr>
+      <td> <%= favorite.content %></td>
+      <% if favorite.image.url.present? %>
+        <td><%= image_tag(favorite.image.url) %></td>
+      <% end %>
+      <td>　　投稿者：<%= favorite.user.name  %></td>
+    </tr>
+<% end %>
+
+ <p><%= link_to 'ホームに戻る', posts_path, class:"btn btn-primary btn-lg" %></p>
