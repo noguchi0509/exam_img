@@ -1,20 +1,30 @@
 <h1>home</h1>
-<table>
-<% @posts.each do |post| %>
-  <tr>
-    <td> <%= post.content %></td>
-    <% if post.image.url.present? %>
-    <td><%= image_tag(post.image.url) %></td>
-    <% end %>
-    <td>　　投稿者：<%= post.user.name  %></td>
-  </tr>
-  <tr>
-    <td><%= link_to '編集する', edit_post_path(post.id), method: :get %></td>
-    <td><%= link_to '削除する', post_path(post.id), method: :delete, data: {confirm: '本当に削除していいですか？'} %></td>
-  </tr>
-
-<% end %>
+<% if current_user.present? %>
+ <table>
+  <% @posts.each do |post| %>
+    <tr>
+      <td> <%= post.content %></td>
+      <% if post.image.url.present? %>
+        <td><%= image_tag(post.image.url) %></td>
+      <% end %>
+      <td>　　投稿者：<%= post.user.name  %></td>
+    </tr>
+    <tr>
+        <% if post.user_id != current_user.id %>
+          <% if current_user.favorites.find_by(post_id: post.id).present? %>
+            <td><%= link_to 'お気に入り解除する', favorite_path(post.id), method: :delete, class: 'btn btn-danger' %></td>
+          <% else %>
+            <td><%= link_to 'お気に入りする', favorites_path(post_id: post.id), method: :post, class: 'btn btn-primary' %></td>
+          <% end %>
+      <% end %>
+      <% if post.user.id == current_user.id %>
+        <td><%= link_to '編集する', edit_post_path(post.id), method: :get %></td>
+        <td><%= link_to '削除する', post_path(post.id), method: :delete, data: {confirm: '本当に削除していいですか？'} %></td>
+      <% end %>
+   </tr>
+  <% end %>
+    <p><%= link_to 'いますぐ投稿！', new_post_path, class:"btn btn-primary btn-lg" %></p>
 </table>
-
- <p><%= link_to 'いますぐ投稿！', new_post_path, class:"btn btn-primary btn-lg" %></p>
- 
+<% else %>
+<p>見るにはログインしてください</p>
+<% end %>

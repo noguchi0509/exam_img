@@ -54,10 +54,14 @@ class PostsController < ApplicationController
     end
    end
     
-   def destroy
-    @post.destroy
-    redirect_to posts_path, notice:"削除しました"
-   end
+    def destroy
+     @post.destroy
+     redirect_to posts_path, notice:"削除しました"
+    end
+    
+    def show
+      @favorite = current_user.favorites.find_by(post_id: @post.id)
+    end
     
     private
     

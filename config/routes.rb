@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :create, :show] do
+    member do
+      get :favorites
+    end
+   end
+    
   resources :sessions, only: [:new, :create, :destroy]
+  resources :favorites, only: [:create, :destroy]
 end
