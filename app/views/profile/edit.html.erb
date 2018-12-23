@@ -1,0 +1,22 @@
+<h1>プロフィールを編集する</h1>
+
+<h2>変更するプロフィール</h2>
+
+<%= form_with(model: @profile, url: profile_path, local: true, method: :patch) do |f| %>
+
+  <%= render 'errormsg' %>
+  <div>
+  <%= f.label :introduction %>
+  <%= f.text_area :introduction %>
+  </div>
+  <div>
+  <%= f.label :profilepic %>
+  <%= image_tag(@profile.profilepic.url) if @profile.profilepic.url %>
+  <%= f.file_field :profilepic %>
+  <br>
+  <%= f.label :birthday %>
+  <%= f.date_field :birthday %>
+  <br>
+  <%= f.submit "プロフィール変更" %>
+  </div>
+<% end %>

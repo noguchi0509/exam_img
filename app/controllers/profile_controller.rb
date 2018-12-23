@@ -11,7 +11,14 @@ class ProfileController < ApplicationController
   redirect_to user_path(current_user.id)
   end
   
-  def edit 
+  def edit
+    @profile= Profile.find(current_user.profile.id)
+  end
+  
+  def update
+    @profile= Profile.find(current_user.profile.id)
+    @profile.update(profile_params)
+    redirect_to user_path, notice:"編集しました！"
   end
   
   private
