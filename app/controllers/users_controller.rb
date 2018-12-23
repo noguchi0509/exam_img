@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @profile = current_user.profile
   end
 
   def favorites

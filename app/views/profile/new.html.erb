@@ -1,0 +1,20 @@
+<h1>Profile作成</h1>
+
+<%= form_with(model: @profile, url: profile_index_path, local: true, method: :post) do |f| %>
+
+  <%= render 'errormsg' %>
+  <div>
+  <%= f.label :introduction %>
+  <%= f.text_area :introduction %>
+  </div>
+  <div>
+  <%= f.label :profilepic %>
+  <%= image_tag(@profile.profilepic.url) if @profile.profilepic.url %>
+  <%= f.file_field :profilepic %>
+  <br>
+  <%= f.label :birthday %>
+  <%= f.date_field :birthday %>
+  <br>
+  <%= f.submit "プロフィール登録" %>
+  </div>
+<% end %>

@@ -16,7 +16,8 @@ Rails.application.routes.draw do
       get :favorites
     end
    end
-    
+   
+  resources :profile
   resources :sessions, only: [:new, :create, :destroy]
   resources :favorites, only: [:create, :destroy]
 end

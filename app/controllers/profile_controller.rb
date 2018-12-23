@@ -1,0 +1,22 @@
+class ProfileController < ApplicationController
+  def new
+  @profile = Profile.new
+  # @profile = current_user.profile.new(user_id: current_user.id)
+  end
+  
+  def create
+   @profile = Profile.new(profile_params)
+  # @profile.user_id = current_user.id
+  @profile = @profile.save
+  redirect_to user_path(current_user.id)
+  end
+  
+  def edit 
+  end
+  
+  private
+  
+  def profile_params
+    params.require(:profile).permit(:profilepic, :introduction,:profilepic_cache, :birthday)
+  end
+end
