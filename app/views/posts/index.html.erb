@@ -7,7 +7,7 @@
       <% if post.image.url.present? %>
         <td><%= image_tag(post.image.url) %></td>
       <% end %>
-      <td>　　投稿者：<%= post.user.name  %></td>
+        <td><%= link_to "#{post.user.name}", profile_path(post.user_id), method: :get %></td>
     </tr>
     <tr>
         <% if post.user_id != current_user.id %>

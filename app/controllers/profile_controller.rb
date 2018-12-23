@@ -6,13 +6,18 @@ class ProfileController < ApplicationController
   
   def create
    @profile = Profile.new(profile_params)
-  # @profile.user_id = current_user.id
+  @profile.user_id = current_user.id
   @profile = @profile.save
   redirect_to user_path(current_user.id)
   end
   
   def edit
     @profile= Profile.find(current_user.profile.id)
+  end
+  
+  def show
+    @user = User.find(params[:id])
+    @profile= Profile.find_by(user_id: params[:id])
   end
   
   def update
