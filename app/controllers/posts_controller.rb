@@ -25,6 +25,7 @@ class PostsController < ApplicationController
       @post.user_id = current_user.id
       if @post.save
           redirect_to posts_path, notice:"投稿しました"
+          ConfirmMailer.confirm_mail(@post).deliver
       else
           render 'confirm'
       end

@@ -21,6 +21,11 @@ class ProfileController < ApplicationController
     redirect_to user_path, notice:"編集しました！"
   end
   
+  def show
+    @user = User.find(params[:id])
+    @profile= Profile.find_by(user_id: params[:id])
+  end
+  
   private
   
   def profile_params

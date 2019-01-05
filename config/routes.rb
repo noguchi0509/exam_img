@@ -2,10 +2,12 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   root to: 'posts#index'
+  
   resources :posts do
     collection do 
       post :confirm
     end
+    
     member do
       post :edit_confirm
     end
@@ -20,4 +22,6 @@ Rails.application.routes.draw do
   resources :profile
   resources :sessions, only: [:new, :create, :destroy]
   resources :favorites, only: [:create, :destroy]
+ 
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
