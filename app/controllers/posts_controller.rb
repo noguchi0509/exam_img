@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
    before_action :set_post,only: [:destroy, :update]
+   before_action :correct_user?,only: [:edit]
 
     def index
       @posts = Post.all
@@ -45,7 +46,7 @@ class PostsController < ApplicationController
       if @post.invalid?
           render 'new'
       end
-    end
+   end
    
    def update
     if @post.update(post_params)
@@ -72,5 +73,14 @@ class PostsController < ApplicationController
     
     def set_post
       @post = Post.find(params[:id])
+    end
+    
+    def correct_user?
+      @selected_post = Post.find(params[:id])
+      @user = User.find_by(id: @selected_post.user_id)
+      unless @user == current_user
+        flash[:danger] = "アクセスする権限がありません。正しいユーザーでログインしてください"
+        redirect_to root_url
+      end
     end
 end

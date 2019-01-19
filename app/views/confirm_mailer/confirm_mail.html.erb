@@ -4,4 +4,6 @@
 
 <p>文章: <%= @content.content %></p>
 
-<p>写真: <%= image_tag(@content.image.url) %></p>
+<% if @content.image.url.present? %>
+  <p>写真: <%= image_tag(@content.image.url) %></p>
+<% end %>
