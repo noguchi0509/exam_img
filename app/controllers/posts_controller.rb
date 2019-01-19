@@ -42,7 +42,7 @@ class PostsController < ApplicationController
    end
    
    def edit_confirm
-      @post = Post.new(post_params)
+      @post = current_user.posts.build(post_params)
       if @post.invalid?
           render 'new'
       end
