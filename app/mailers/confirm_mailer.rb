@@ -1,6 +1,6 @@
 class ConfirmMailer < ApplicationMailer
   def confirm_mail(content)
     @content = content
-    mail to: "nrmke4g7pr@gmail.com", subject: "投稿の確認メール"
+    mail to: @content.user.email, subject: "投稿の確認メール"
   end
 end

@@ -1,42 +1,42 @@
 <h1>home</h1>
-<% if current_user.present? %>
-  <div class="jumbotron">
-    <h1>画像とテキストを投稿しよう！</h1>
-    <p>IGMは画像とテキストを投稿できるサイトです。</p>
-    <% if logged_in? %>
-      <p><%= link_to 'いますぐ投稿！', new_post_path, class:"btn btn-primary btn-lg" %></p>
-    <% else %>
-      <p><%= link_to 'アカウントを作る', new_user_path, class:"btn btn-primary btn-lg" %></p>
-    <% end %>
-  </div>
-  
- <div class="row">
-  <% @posts.each do |post| %>
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <% if post.image.url.present? %>
-        <%= image_tag(post.image.url) %>
-      <% end %>
-    <div class="caption">
-    <p>テキスト:<%= post.content %></p>
-    <p>投稿者<%= link_to "#{post.user.name}", profile_path(post.user_id), method: :get %></p>
-    <% if post.user_id != current_user.id %>
-      <% if current_user.favorites.find_by(post_id: post.id).present? %>
-        <p><%= link_to 'お気に入り解除する', favorite_path(current_user.favorites.find_by(post_id: post.id)), method: :delete, class: 'btn btn-danger' %></p>
+  <% if current_user.present? %>
+    <div class="jumbotron">
+      <h1>画像とテキストを投稿しよう！</h1>
+      <p>IGMは画像とテキストを投稿できるサイトです。</p>
+      <% if logged_in? %>
+        <p><%= link_to 'いますぐ投稿！', new_post_path, class:"btn btn-primary btn-lg" %></p>
       <% else %>
-        <p><%= link_to 'お気に入りする', favorites_path(post_id: post.id), method: :post, class: 'btn btn-primary' %></p>
+        <p><%= link_to 'アカウントを作る', new_user_path, class:"btn btn-primary btn-lg" %></p>
       <% end %>
-     <% end %>
+    </div>
+  
+   <div class="row">
+     <% @posts.each do |post| %>
+     <div class="col-sm-6 col-md-4">
+       <div class="thumbnail">
+         <% if post.image.url.present? %>
+           <%= image_tag(post.image.url) %>
+         <% end %>
+      <div class="caption">
+        <p>テキスト:<%= post.content %></p>
+        <p>投稿者<%= link_to "#{post.user.name}", profile_path(post.user_id), method: :get %></p>
+        <% if post.user_id != current_user.id %>
+          <% if current_user.favorites.find_by(post_id: post.id).present? %>
+            <p><%= link_to 'お気に入り解除する', favorite_path(current_user.favorites.find_by(post_id: post.id)), method: :delete, class: 'btn btn-danger' %></p>
+          <% else %>
+            <p><%= link_to 'お気に入りする', favorites_path(post_id: post.id), method: :post, class: 'btn btn-primary' %></p>
+          <% end %>
+        <% end %>
      
-    <% if post.user.id == current_user.id %>
-      <p><%= link_to '編集する', edit_post_path(post.id), method: :get %></p>
-      <p><%= link_to '削除する', post_path(post.id), method: :delete, data: {confirm: '本当に削除していいですか？'} %></p>
-    <% end %>
+        <% if post.user.id == current_user.id %>
+          <p><%= link_to '編集する', edit_post_path(post.id), method: :get %></p>
+          <p><%= link_to '削除する', post_path(post.id), method: :delete, data: {confirm: '本当に削除していいですか？'} %></p>
+        <% end %>
+      </div>
      </div>
     </div>
-   </div>
-  <% end %>
+   <% end %>
   </div>
   <% else %>
-      <p>見るにはログインしてください</p>
-    <% end %>
+    <p>見るにはログインしてください</p>
+  <% end %>
