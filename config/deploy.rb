@@ -65,4 +65,4 @@ namespace :deploy do
   end
 end
 
-set :linked_files, %w{.env}
+# set :linked_files, %w{.env}
