@@ -19,9 +19,9 @@ CarrierWave.configure do |config|
   case Rails.env
     when 'production'
       config.fog_directory = 'exam-igm-production'
-      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/exam-igm-production'
+      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/igm--production'
     when 'development'
       config.fog_directory = 'exam-igm-development'
-      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/exam-igm-development'
+      config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/igm--development'
   end
 end
